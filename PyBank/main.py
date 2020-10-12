@@ -3,7 +3,6 @@ import csv
 
 #path to csvfile
 filepath = os.path.join("PyBank","Resources","budget_data.csv")
-
 #set variables 
 total_months = 0
 net_total = 0
@@ -22,8 +21,10 @@ with open(filepath,'r') as csvfile:
     # find total number of months,net total of profit/less and set variables for rows 
     total_months += 1
     net_total += int(row[1])
-    greatest_increase_month = row[0]
-    greatest_increase = int(row[1])
+    # greatest_increase_month = row[0]
+    # greatest_increase = int(row[1])
+    # greatest_decrease_month = row[0]
+    # greatest_increase = int(row[1])
     previous_month_profit = int(row[1])
     
     
@@ -31,7 +32,7 @@ with open(filepath,'r') as csvfile:
         total_months += 1 
         net_total += int(row[1])
 
-        # calculate profit change from current month and previous month 
+        # calculate profit change from current month to previous month 
         profit_change = int(row[1]) - previous_month_profit
         monthly_change.append(profit_change)
         previous_month_profit = int(row[1])
