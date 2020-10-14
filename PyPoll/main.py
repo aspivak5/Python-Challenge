@@ -18,7 +18,7 @@ with open(filepath,'r') as csvfile:
     for row in csvreader:
         total_votes += 1
 
-        #calcualte the total votes won for each candidate 
+        #calcualte the votes won for each candidate 
         if row[2] == "Correy":
             correy_votes += 1
         elif row[2] == "Khan":
@@ -27,17 +27,16 @@ with open(filepath,'r') as csvfile:
             li_votes += 1 
         else:
             otooley_votes += 1
-    #calculate percantage of votes for each candidate 
+    #calculate the percantage of votes for each candidate 
     correy_percentage = round((correy_votes/total_votes) * 100,1)
     khan_percentage = round((khan_votes/total_votes) * 100,1)
     li_percentage = round((li_votes/total_votes) * 100,1)
     otooley_percentage = round((otooley_votes/total_votes) * 100,1)
 
-    # find out who got the most votes
+    # find out who recieved the most votes
     most_votes = max(correy_votes, khan_votes, li_votes, otooley_votes)
 
-    # based on who got most votes find the winner 
-
+    # based on who recieved the most votes find the winner 
     if most_votes == correy_votes:
         winner = "Correy"
     elif most_votes == khan_votes:
