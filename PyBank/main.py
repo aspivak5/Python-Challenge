@@ -1,54 +1,45 @@
 import os 
 import csv 
 
-#path to csvfile
 filepath = os.path.join("PyBank","Resources","budget_data.csv")
 #set variables 
-total_months = 0
 total_profit = 0
 greatest_increase_month = 0
 greatest_increase = 0
 greatest_decrease_month = 0
 greatest_decrease = 0
 month_count = []
-monthly_change = []
+month_change = []
+previous_month_profit = 0
+profit_change=0
 
-#open the csvfile
 with open(filepath,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
-    row = next(csvreader)
-    #find the total months, total profit gain/loss and set variables for rows in csv
-    total_months += 1
-    total_profit += int(row[1])
-    greatest_increase_month = row[0]
-    greatest_increase = int(row[1])
-    greatest_decrease_month = row[0]
-    greatest_decrease = int(row[1])
-    previous_month_profit = int(row[1])
-    #calculate total months and total profit gain/loss of entire dataset
+#calculate total profit & months 
     for row in csvreader:
-        total_months += 1
         total_profit += int(row[1])
-
-        # calculate profit change from current month to previous month 
-        profit_change = int(row[1]) - previous_month_profit
-        monthly_change.append(profit_change)
-        previous_month_profit = int(row[1])
         month_count.append(row[0])
+        total_months=len(month_count)
 
+        # Calculate change in profit 
+        profit_change = int(row[1])- previous_month_profit 
+        month_change.append(profit_change)
+        previous_month_profit = int(row[1])
+#find greatest increase and decrease 
         if int(row[1]) > greatest_increase:
             greatest_increase = int(row[1])
             greatest_increase_month = row[0]
         if int(row[1]) < greatest_decrease:
             greatest_decrease = int(row[1])
-            greatest_decrease_month = row[0]
-    average_change = round(sum(monthly_change) / len(monthly_change),2)
-    highest_profit = max(monthly_change)
-    lowest_proft = min(monthly_change)
-
+            greatest_decrease_month = row[0]   
+        highest_profit = max(month_change)
+        lowest_proft = min(month_change)
+#remove first number in month change list and calculate average change
+month_change.remove(867884)
+average_change = round(sum(month_change) / len(month_change),2) 
 #print analysis
-print(f"Financial Analysis")
+print("Financial Analysis")
 print("--------------------------")
 print(f"Total Months: {total_months}")
 print(f"Total: ${total_profit}")
@@ -68,6 +59,3 @@ with open (outputfile,'w') as csvfile:
     writer.writerow([f"Average Change: ${average_change}"])
     writer.writerow([f"Greatest Increase in Profits: {greatest_increase_month} (${highest_profit}) "])
     writer.writerow([f"Greatest Decrease in Profits: {greatest_decrease_month} (${lowest_proft}) "])
-
-
-        

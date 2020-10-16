@@ -14,7 +14,7 @@ otooley_votes = 0
 with open(filepath,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
-    
+    # calculate total votes
     for row in csvreader:
         total_votes += 1
 
