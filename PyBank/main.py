@@ -12,7 +12,7 @@ month_count = []
 month_change = []
 previous_month_profit = 0
 profit_change=0
-
+#open csvfile
 with open(filepath,'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
@@ -26,7 +26,7 @@ with open(filepath,'r') as csvfile:
         profit_change = int(row[1])- previous_month_profit 
         month_change.append(profit_change)
         previous_month_profit = int(row[1])
-#find greatest increase and decrease 
+#find greatest increase and decrease of profit
         if int(row[1]) > greatest_increase:
             greatest_increase = int(row[1])
             greatest_increase_month = row[0]
@@ -35,7 +35,7 @@ with open(filepath,'r') as csvfile:
             greatest_decrease_month = row[0]   
         highest_profit = max(month_change)
         lowest_proft = min(month_change)
-#remove first number in month change list and calculate average change
+#remove first number in month_change list and calculate average change
 month_change.remove(867884)
 average_change = round(sum(month_change) / len(month_change),2) 
 #print analysis

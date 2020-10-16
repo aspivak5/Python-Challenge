@@ -1,6 +1,6 @@
 import os
 import csv
-#path to csvfile 
+
 filepath = os.path.join("PyPoll", "Resources", "election_data.csv")
 
 #set variables 
@@ -18,7 +18,7 @@ with open(filepath,'r') as csvfile:
     for row in csvreader:
         total_votes += 1
 
-        #calcualte the votes won for each candidate 
+        #calcualte candidate votes 
         if row[2] == "Correy":
             correy_votes += 1
         elif row[2] == "Khan":
